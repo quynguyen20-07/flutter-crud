@@ -1,9 +1,10 @@
 import 'package:crud_fltter/database.dart';
-import 'package:crud_fltter/home_page.dart';
+import 'package:crud_fltter/task_page.dart';
 import 'package:intl/intl.dart';
 import 'package:crud_fltter/model.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class SubmitTask extends StatefulWidget {
   int? todoId;
   String? todoTitle;
@@ -42,9 +43,9 @@ class _handleSubmitTaskState extends State<SubmitTask> {
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _titleController =
+    final TextEditingController titleController =
         TextEditingController(text: widget.todoTitle);
-    final TextEditingController _descController =
+    final TextEditingController descController =
         TextEditingController(text: widget.todoDesc);
 
     String barTitle;
@@ -59,7 +60,7 @@ class _handleSubmitTaskState extends State<SubmitTask> {
       appBar: AppBar(
         title: Text(
           barTitle,
-          style: TextStyle(
+          style: const TextStyle(
               fontSize: 22, fontWeight: FontWeight.w700, letterSpacing: 1),
         ),
         centerTitle: true,
@@ -75,7 +76,7 @@ class _handleSubmitTaskState extends State<SubmitTask> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.only(top: 100),
+        padding: const EdgeInsets.only(top: 100),
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -84,11 +85,11 @@ class _handleSubmitTaskState extends State<SubmitTask> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
-                          controller: _titleController,
+                          controller: titleController,
                           keyboardType: TextInputType.multiline,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               border: OutlineInputBorder(), hintText: "Title"),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -98,17 +99,17 @@ class _handleSubmitTaskState extends State<SubmitTask> {
                           },
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: TextFormField(
                           maxLines: null,
                           minLines: 5,
-                          controller: _descController,
+                          controller: descController,
                           keyboardType: TextInputType.multiline,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               hintText: "Description"),
                           validator: (value) {
@@ -121,10 +122,10 @@ class _handleSubmitTaskState extends State<SubmitTask> {
                       ),
                     ],
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -138,14 +139,14 @@ class _handleSubmitTaskState extends State<SubmitTask> {
                               if (widget.update == true) {
                                 dbSQLite!.updateData(TodoModel(
                                   id: widget.todoId,
-                                  title: _titleController.text,
-                                  desc: _descController.text,
+                                  title: titleController.text,
+                                  desc: descController.text,
                                   datetime: widget.todoDT,
                                 ));
                               } else {
                                 dbSQLite!.insert(TodoModel(
-                                  title: _titleController.text,
-                                  desc: _descController.text,
+                                  title: titleController.text,
+                                  desc: descController.text,
                                   datetime: DateFormat('yMd')
                                       .add_jm()
                                       .format(DateTime.now())
@@ -156,18 +157,18 @@ class _handleSubmitTaskState extends State<SubmitTask> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => Home()));
+                                      builder: (context) => const TaskPage()));
 
-                              _titleController.clear();
-                              _descController.clear();
+                              titleController.clear();
+                              descController.clear();
 
                               print("Data added");
                             }
                           },
                           child: Container(
                             alignment: Alignment.center,
-                            margin: EdgeInsets.symmetric(horizontal: 20),
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            margin: const EdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             height: 55,
                             width: 120,
                             // decoration: BoxDecoration(boxShadow: [
@@ -176,7 +177,7 @@ class _handleSubmitTaskState extends State<SubmitTask> {
                             //       blurRadius: 5,
                             //       spreadRadius: 1)
                             // ]),
-                            child: Text(
+                            child: const Text(
                               "Submit",
                               style: TextStyle(
                                   fontSize: 22,
@@ -187,26 +188,22 @@ class _handleSubmitTaskState extends State<SubmitTask> {
                         ),
                       ),
                       Material(
+                        color: Colors.red[400],
+                        borderRadius: BorderRadius.circular(15),
                         child: InkWell(
                           onTap: () {
                             setState(() {
-                              _titleController.clear();
-                              _descController.clear();
+                              titleController.clear();
+                              descController.clear();
                             });
                           },
                           child: Container(
                             alignment: Alignment.center,
-                            margin: EdgeInsets.symmetric(horizontal: 20),
-                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            margin: const EdgeInsets.symmetric(horizontal: 20),
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
                             height: 55,
                             width: 120,
-                            // decoration: BoxDecoration(boxShadow: [
-                            //   BoxShadow(
-                            //       color: Colors.black12,
-                            //       blurRadius: 5,
-                            //       spreadRadius: 1)
-                            // ]),
-                            child: Text(
+                            child: const Text(
                               "Clear",
                               style: TextStyle(
                                   fontSize: 22,
@@ -215,8 +212,6 @@ class _handleSubmitTaskState extends State<SubmitTask> {
                             ),
                           ),
                         ),
-                        color: Colors.red[400],
-                        borderRadius: BorderRadius.circular(15),
                       ),
                     ]),
               )

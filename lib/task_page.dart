@@ -35,11 +35,11 @@ class _TaskPage extends State<TaskPage> {
               future: dataList,
               builder: (context, AsyncSnapshot<List<TodoModel>> snapshot) {
                 if (!snapshot.hasData || snapshot.data == null) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 } else if (snapshot.data!.length == 0) {
-                  return Center(
+                  return const Center(
                     child: Text(
                       "No tasks found",
                       style: TextStyle(
@@ -65,7 +65,7 @@ class _TaskPage extends State<TaskPage> {
                         direction: DismissDirection.endToStart,
                         background: Container(
                           color: Colors.redAccent,
-                          child: Icon(
+                          child: const Icon(
                             Icons.delete_forever,
                             color: Colors.white,
                             size: 22,
@@ -80,7 +80,7 @@ class _TaskPage extends State<TaskPage> {
                           });
                         },
                         child: Container(
-                          margin: EdgeInsets.all(5),
+                          margin: const EdgeInsets.all(5),
                           decoration: BoxDecoration(boxShadow: [
                             BoxShadow(
                                 color: Colors.yellow.shade300,
@@ -89,25 +89,25 @@ class _TaskPage extends State<TaskPage> {
                           ]),
                           child: Column(children: [
                             ListTile(
-                              contentPadding: EdgeInsets.all(10),
+                              contentPadding: const EdgeInsets.all(10),
                               title: Padding(
-                                padding: EdgeInsets.only(bottom: 10),
+                                padding: const EdgeInsets.only(bottom: 10),
                                 child: Text(
                                   todoTitle,
-                                  style: TextStyle(fontSize: 19),
+                                  style: const TextStyle(fontSize: 19),
                                 ),
                               ),
                               subtitle: Text(
                                 todoDesc,
-                                style: TextStyle(fontSize: 17),
+                                style: const TextStyle(fontSize: 17),
                               ),
                             ),
-                            Divider(
+                            const Divider(
                               color: Colors.black,
                               thickness: 0.8,
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   vertical: 3, horizontal: 10),
                               child: Row(
                                   mainAxisAlignment:
@@ -115,7 +115,7 @@ class _TaskPage extends State<TaskPage> {
                                   children: [
                                     Text(
                                       todoDT,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.w400,
                                           fontStyle: FontStyle.italic,
                                           fontSize: 14),
@@ -134,7 +134,7 @@ class _TaskPage extends State<TaskPage> {
                                                       update: true,
                                                     )));
                                       },
-                                      child: Icon(
+                                      child: const Icon(
                                         Icons.edit_note,
                                         size: 28,
                                         color: Colors.green,
@@ -157,7 +157,7 @@ class _TaskPage extends State<TaskPage> {
               context, MaterialPageRoute(builder: (context) => SubmitTask()));
         },
         backgroundColor: Colors.green,
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
